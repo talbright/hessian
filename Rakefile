@@ -10,7 +10,7 @@ Rake::TestTask.new do |t|
   t.warning = true
 end
 
-PKG_VERSION = "1.0.2"
+PKG_VERSION = "1.0.3"
 PKG_FILES = FileList[
   'LICENSE',
   'Rakefile',
@@ -21,9 +21,9 @@ PKG_FILES = FileList[
 spec = Gem::Specification.new do |s|
   s.name = "hessian"
   s.version = PKG_VERSION
-  s.author = "Christer Sandberg"
-  s.email = "chrsan@gmail.com"
-  s.homepage = "http://www.baanii.se/"
+  s.author = "Christer Sandberg,Trent Albright,Steven Hilton"
+  s.email = "trent.albright@gmail.com"
+  s.homepage = "https://github.com/talbright/hessian"
   s.platform = Gem::Platform::RUBY
   s.summary = "A Ruby Hessian client."
   s.files = PKG_FILES.to_a
