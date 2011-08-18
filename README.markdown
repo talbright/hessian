@@ -1,24 +1,24 @@
-= Ruby Hessian Client
+# Ruby Hessian Client
 
 This is a Ruby implementation of the Hessian Binary Web Service Protocol. This is
 the Github version of the Ruby Hessian client originating from
-http://rubyforge.org/projects/hessian/, with patches and updates.
+[RubyForge](http://rubyforge.org/projects/hessian), with patches and updates.
 
-== What is Hessian?
+## What is Hessian?
 
 Here's the description from the Hessian site at
-{http://www.caucho.com/hessian}[http://www.caucho.com/hessian].
+[http://www.caucho.com/hessian](http://www.caucho.com/hessian).
 
-<em>The Hessian binary web service protocol makes web services usable without
+The Hessian binary web service protocol makes web services usable without
 requiring a large framework, and without learning yet another alphabet soup of
 protocols. Because it is a binary protocol, it is well-suited to sending binary
-data without any need to extend the protocol with attachments.</em>
+data without any need to extend the protocol with attachments.
 
-Please consult the Hessian[http://www.caucho.com/hessian] home page or the
-{Hessian 1.0.2}[http://www.caucho.com/resin-3.0/protocols/hessian-1.0-spec.xtp]
+Please consult the [Hessian](http://www.caucho.com/hessian) home page or the
+[Hessian 1.0.2](http://www.caucho.com/resin-3.0/protocols/hessian-1.0-spec.xtp)
 specification for more information.
 
-== Usage
+## Usage
 
 The Hessian Ruby Client acts as a proxy for remote calls to Hessian services.
 
@@ -56,7 +56,7 @@ ref:: The type referenced
 The combining Hessian types can be given an explicit type understood by the
 service. This can be used to specify that a list only contain strings for
 example, or more importantly - this is how to serialize custom types.
-A <i>custom type</i> in this context is all types not conforming to the 13
+A *custom type* in this context is all types not conforming to the 13
 types above, such as your own objects etc.
 
 Custom types are serialized using the +map+ with an explicit type
@@ -74,17 +74,17 @@ might be unknown in Ruby. You may then convert that Hash to suite your needs.
 Errors in a call to a Hessian service will result in a fault that is wrapped as
 a Hessian::HessianException.
 
-== Examples
+## Examples
 
 To create a Hessian::HessianClient instance:
-  client = Hessian::HessianClient.new('http://localhost:8080/echo')
+    client = Hessian::HessianClient.new('http://localhost:8080/echo')
 
 To specify a user and a password for basic authentication:
-  client.user, client.password = 'foo', 'bar'
+    client.user, client.password = 'foo', 'bar'
 
 To create a Hessian::HessianClient using a proxy:
-  proxy = { :host => 'proxy.foo.bar', :port => '80' }
-  client = Hessian::HessianClient.new('http://localhost:8080/echo, proxy)
+    proxy = { :host => 'proxy.foo.bar', :port => '80' }
+    client = Hessian::HessianClient.new('http://localhost:8080/echo, proxy)
 
 The valid symbol keys for the proxy hash are:
 [:host] Proxy host
@@ -93,53 +93,53 @@ The valid symbol keys for the proxy hash are:
 [:password] Proxy password
 
 Let's say that the service bound to <tt>/echo</tt> is the following:
-  class Echo
-    def echo(msg)
-      "Echo reply: #{msg}"
+    class Echo
+      def echo(msg)
+        "Echo reply: #{msg}"
+      end
     end
-  end
 
 Then invoking the service call +echo+:
-  client.echo('hessian') => "Echo reply: hessian"
+    client.echo('hessian') => "Echo reply: hessian"
 
-=== Explicit types
+## Explicit types
 
 To specify an <i>explicitly typed</i> list as a Java string array
 for example (where +foo+ is a method on the Java service used):
-  list = %w(one two three)
-  client.foo(Hessian::TypeWrapper.new('[string', list))
+    list = %w(one two three)
+    client.foo(Hessian::TypeWrapper.new('[string', list))
 or
-  list = %w(one two three)
-  def list.hessian_type
-    '[string'
-  end
-  client.foo(list)
+    list = %w(one two three)
+    def list.hessian_type
+      '[string'
+    end
+    client.foo(list)
 
 Let's pretend that we want to call a Java service that has the following
 interface:
-  public interface PersonService implements Serializable {
-      public Person addPerson(Person person);
-  }
+    public interface PersonService implements Serializable {
+       public Person addPerson(Person person);
+    }
 and where the Person is defined as (could be a JavaBean as well):
-  public interface Person implements Serializable {
-      public int age;
-      public String name;
-  }
+    public interface Person implements Serializable {
+       public int age;
+       public String name;
+    }
 
 +Person+ is a custom type so we need to send a Hash with an explicit type
 specified:
-  person = { 'age' => 32, 'name' => 'Christer Sandberg' }
-  reply = client.addPerson(Hessian::TypeWrapper.new('Person', person))
+    person = { 'age' => 32, 'name' => 'Christer Sandberg' }
+    reply = client.addPerson(Hessian::TypeWrapper.new('Person', person))
 
 The Ruby Hessian Client will automatically convert a Struct to a Hash so the
 following will also work:
-  person = Struct.new(:age, :name)[32, 'Christer Sandberg']
-  class << person
-    def hessian_type
-      'Person'
+    person = Struct.new(:age, :name)[32, 'Christer Sandberg']
+    class << person
+      def hessian_type
+        'Person'
+      end
     end
-  end
-  reply = client.addPerson(person)
+    reply = client.addPerson(person)
 
 The result from these invocations would be a Hash:
-  reply => { 'age' => 32, 'name' => 'Christer Sandberg' }
+    reply => { 'age' => 32, 'name' => 'Christer Sandberg' }
