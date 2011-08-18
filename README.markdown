@@ -95,7 +95,7 @@ The valid symbol keys for the proxy hash are:
 [:user] Proxy user
 [:password] Proxy password
 
-Let's say that the service bound to <tt>/echo</tt> is the following:
+Let's say that the service bound to **echo** is the following:
 
     class Echo
       def echo(msg)
@@ -110,7 +110,7 @@ Then invoking the service call **echo**:
 ## Explicit types
 
 To specify an *explicitly typed* list as a Java string array
-for example (where +foo+ is a method on the Java service used):
+for example (where **foo** is a method on the Java service used):
 
     list = %w(one two three)
     client.foo(Hessian::TypeWrapper.new('[string', list))
