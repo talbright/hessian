@@ -77,12 +77,15 @@ a Hessian::HessianException.
 ## Examples
 
 To create a Hessian::HessianClient instance:
+
     client = Hessian::HessianClient.new('http://localhost:8080/echo')
 
 To specify a user and a password for basic authentication:
+
     client.user, client.password = 'foo', 'bar'
 
 To create a Hessian::HessianClient using a proxy:
+
     proxy = { :host => 'proxy.foo.bar', :port => '80' }
     client = Hessian::HessianClient.new('http://localhost:8080/echo, proxy)
 
@@ -93,6 +96,7 @@ The valid symbol keys for the proxy hash are:
 [:password] Proxy password
 
 Let's say that the service bound to <tt>/echo</tt> is the following:
+
     class Echo
       def echo(msg)
         "Echo reply: #{msg}"
@@ -100,15 +104,19 @@ Let's say that the service bound to <tt>/echo</tt> is the following:
     end
 
 Then invoking the service call +echo+:
+
     client.echo('hessian') => "Echo reply: hessian"
 
 ## Explicit types
 
 To specify an <i>explicitly typed</i> list as a Java string array
 for example (where +foo+ is a method on the Java service used):
+
     list = %w(one two three)
     client.foo(Hessian::TypeWrapper.new('[string', list))
+
 or
+
     list = %w(one two three)
     def list.hessian_type
       '[string'
@@ -117,10 +125,13 @@ or
 
 Let's pretend that we want to call a Java service that has the following
 interface:
+    
     public interface PersonService implements Serializable {
        public Person addPerson(Person person);
     }
+
 and where the Person is defined as (could be a JavaBean as well):
+    
     public interface Person implements Serializable {
        public int age;
        public String name;
@@ -128,11 +139,13 @@ and where the Person is defined as (could be a JavaBean as well):
 
 +Person+ is a custom type so we need to send a Hash with an explicit type
 specified:
+    
     person = { 'age' => 32, 'name' => 'Christer Sandberg' }
     reply = client.addPerson(Hessian::TypeWrapper.new('Person', person))
 
 The Ruby Hessian Client will automatically convert a Struct to a Hash so the
 following will also work:
+    
     person = Struct.new(:age, :name)[32, 'Christer Sandberg']
     class << person
       def hessian_type
