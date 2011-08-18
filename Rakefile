@@ -10,7 +10,7 @@ Rake::TestTask.new do |t|
   t.warning = true
 end
 
-PKG_VERSION = "1.0.1"
+PKG_VERSION = "1.0.2"
 PKG_FILES = FileList[
   'LICENSE',
   'Rakefile',
