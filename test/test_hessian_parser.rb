@@ -24,9 +24,6 @@ class HessianParserTest < Test::Unit::TestCase
   def test_string
     assert_equal "string", parse("r\001\000S\000\006stringz")
   end
-  def test_symbol
-    assert_equal :string.to_s, parse("r\001\000S\000\006stringz")
-  end
   def test_null
     assert_equal nil, parse("r\001\000Nz")
   end
