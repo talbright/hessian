@@ -32,26 +32,26 @@ used in the Ruby Hessian Client.
 
 The 9 primitive types:
 
-binary:: Hessian::Binary
-boolean:: TrueClass or FalseClass
-date:: Time
-double:: Float
-int:: Integer
-long:: Integer
-remote:: Not implemented!
-string:: String
-xml:: String
-symbol:: String
+* binary:: Hessian::Binary
+* boolean:: TrueClass or FalseClass
+* date:: Time
+* double:: Float
+* int:: Integer
+* long:: Integer
+* remote:: Not implemented!
+* string:: String
+* xml:: String
+* symbol:: String
 
 The 2 combining types:
 
-list:: Array
-map:: Hash
+* list:: Array
+* map:: Hash
 
 Finally, the 2 special constructs:
 
-null:: NilClass
-ref:: The type referenced
+* null:: NilClass
+* ref:: The type referenced
 
 The combining Hessian types can be given an explicit type understood by the
 service. This can be used to specify that a list only contain strings for
