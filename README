@@ -1,7 +1,7 @@
 = Ruby Hessian Client
 
 This is a Ruby implementation of the Hessian Binary Web Service Protocol. This is
-the Github version of the Ruby Hessian client originally available on
+the Github version of the Ruby Hessian client originating from
 http://rubyforge.org/projects/hessian/, with patches and updates.
 
 == What is Hessian?
