@@ -59,7 +59,7 @@ example, or more importantly - this is how to serialize custom types.
 A *custom type* in this context is all types not conforming to the 13
 types above, such as your own objects etc.
 
-Custom types are serialized using the +map+ with an explicit type
+Custom types are serialized using the **map** with an explicit type
 specified and the underlying Ruby type must be a Hash. To specifiy an explicit
 type wrap the object in a Hessian::TypeWrapper or create the method
 +hessian_type+ on that object. See the examples below.
@@ -103,13 +103,13 @@ Let's say that the service bound to <tt>/echo</tt> is the following:
       end
     end
 
-Then invoking the service call +echo+:
+Then invoking the service call **echo**:
 
     client.echo('hessian') => "Echo reply: hessian"
 
 ## Explicit types
 
-To specify an <i>explicitly typed</i> list as a Java string array
+To specify an *explicitly typed* list as a Java string array
 for example (where +foo+ is a method on the Java service used):
 
     list = %w(one two three)
@@ -137,7 +137,7 @@ and where the Person is defined as (could be a JavaBean as well):
        public String name;
     }
 
-+Person+ is a custom type so we need to send a Hash with an explicit type
+**Person** is a custom type so we need to send a Hash with an explicit type
 specified:
     
     person = { 'age' => 32, 'name' => 'Christer Sandberg' }
@@ -155,4 +155,6 @@ following will also work:
     reply = client.addPerson(person)
 
 The result from these invocations would be a Hash:
+
     reply => { 'age' => 32, 'name' => 'Christer Sandberg' }
+
